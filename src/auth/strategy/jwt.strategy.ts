@@ -6,6 +6,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(
     Strategy,
+    'jwt', //This gets assigned by default and can be left blank, it's just to know where 'jwt' is coming from
 ) {
     constructor(config: ConfigService) {
         super({
@@ -15,4 +16,10 @@ export class JwtStrategy extends PassportStrategy(
         })
     }
 
+    validate(payload: any) {
+        console.log({payload,})
+
+        return payload
+
+    }
 }
