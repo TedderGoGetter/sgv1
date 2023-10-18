@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common'
 import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(
     Strategy,
     'jwt', //This gets assigned by default and can be left blank, it's just to know where 'jwt' is coming from
 ) {
-    constructor(config: ConfigService) {
+    constructor(config: ConfigService, private prisma: PrismaService) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,  //false by default but good for testing
@@ -16,10 +17,15 @@ export class JwtStrategy extends PassportStrategy(
         })
     }
 
-    validate(payload: any) {
-        console.log({payload,})
-
-        return payload
-
-    }
+    async validate(payload: {sub: number, email: string}) {
+        console.log('hi')
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: payload.sub
+            }
+        })
+        delete user.hash
+        
+        return user //if payload is null then the GET route returns an error. This is how we validate the user.
+    } 
 }
