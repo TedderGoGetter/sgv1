@@ -37,7 +37,7 @@ model Inst {
   link         String?
 
   userId Int
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // @@map("insts")
 }

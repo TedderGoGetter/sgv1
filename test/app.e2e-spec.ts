@@ -15,7 +15,7 @@ describe ('App e2e', () => {
     app.useGlobalPipes(new ValidationPipe({
       whitelist: true,
     }));
-    await app.init()
+    await app.init() 
   })
 
   afterAll(() => app.close) //ending logic
