@@ -70,7 +70,6 @@ describe ('App e2e', () => {
           .post('/auth/signup')
           .withBody(dto)
           .expectStatus(201)
-          // .inspect()  //with inspect it will log the body, code and headers.
       })
     })
 
@@ -116,7 +115,18 @@ describe ('App e2e', () => {
   })
 
   describe('User', () => {
-    describe('Get User', () => {})
+    describe('Get User', () => {
+      it('should get current user', () => {
+        return pactum
+        .spec()
+        .get('/users/me')
+        .withHeaders ({
+          Authorization: 'Bearer $S{userAccessToken}',  //the S is for Store
+        })
+        .expectStatus(200)
+        .inspect()
+      })
+    })
 
     describe('Edit User', () => {})
   })
@@ -124,6 +134,7 @@ describe ('App e2e', () => {
   describe('Inst', () => {
     describe('Create Inst', () => {})
 
-    describe('Get Inst', () => {})
+    describe('Get Inst', () => {
+    })
   })
 })
