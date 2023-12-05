@@ -10,5 +10,4 @@ export class UserController {
     getMe(@GetUser('') user: User) {
         return user  //you could change this to just the userId or whatever you'd like to get.
     }
-
 }

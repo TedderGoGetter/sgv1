@@ -19,7 +19,5 @@ export class PrismaService extends PrismaClient {
             this.inst.deleteMany(),
             this.user.deleteMany(),
         ])
-
-        
     }
 }
