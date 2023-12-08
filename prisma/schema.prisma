@@ -11,33 +11,45 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isAdmin   Boolean  @default(false)
 
   email String @unique
   hash  String
 
+  karma Int @default(0)
+
   firstName String?
   lastName  String?
   userName  String
+  posts     Post[]  @relation("Posts")
+  favPosts  Post[]  @relation("Favs")
+}
 
+model Post {
+  id String @id @default(uuid())
 
-  insts      Inst[]
+  author   User   @relation("Posts", fields: [authorId], references: id)
+  authorId String
 
-  // @@map("users")
+  legitimacy Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  favBy   User?   @relation("Favs", fields: [favById], references: id)
+  favById String?
 }
 
 model Inst {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
+}
 
-  title        String
-  manufacturer String?
-  description  String?
-  link         String?
+model Song {
+  id String @id @default(uuid())
+}
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // @@map("insts")
+model Artist {
+  id String @id @default(uuid())
 }
