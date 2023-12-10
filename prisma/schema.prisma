@@ -24,32 +24,47 @@ model User {
   firstName String?
   lastName  String?
   userName  String
-  posts     Post[]  @relation("Posts")
-  favPosts  Post[]  @relation("Favs")
-}
-
-model Post {
-  id String @id @default(uuid())
-
-  author   User   @relation("Posts", fields: [authorId], references: id)
-  authorId String
-
-  legitimacy Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  favBy   User?   @relation("Favs", fields: [favById], references: id)
-  favById String?
-}
-
-model Inst {
-  id String @id @default(uuid())
+  songs     Song[]  @relation("Songs")
+  favPosts  Song[]  @relation("Favs")
+  edited    Song[]  @relation("Editors")
 }
 
 model Song {
   id String @id @default(uuid())
+
+  author   User   @relation("Songs", fields: [authorId], references: id)
+  authorId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favBy   User?   @relation("Favs", fields: [favById], references: id)
+  favById String?
+  editors User[]  @relation("Editors")
+
+  //Parameters for the actual post
+  legitimacy Int
+  artist     Artist[]
+  instrument Instrument[]
+
+  mediaLink String
+  Timestamp Int
+}
+
+model Instrument {
+  id           String         @id @default(uuid())
+  name         String
+  type         String
+  manufacturer Manufacturer[]
+  songs        Song[]
+}
+
+model Manufacturer {
+  id         String       @id @default(uuid())
+  instrument Instrument[]
 }
 
 model Artist {
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
+  song Song[]
 }
