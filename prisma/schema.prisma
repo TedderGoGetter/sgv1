@@ -43,6 +43,7 @@ model Song {
   editors User[]  @relation("Editors")
 
   //Parameters for the actual post
+  name       String
   legitimacy Int
   artist     Artist[]
   instrument Instrument[]
@@ -53,7 +54,7 @@ model Song {
 
 model Instrument {
   id           String         @id @default(uuid())
-  name         String
+  name         String         @unique
   type         String
   manufacturer Manufacturer[]
   songs        Song[]
@@ -61,10 +62,12 @@ model Instrument {
 
 model Manufacturer {
   id         String       @id @default(uuid())
+  name       String       @unique
   instrument Instrument[]
 }
 
 model Artist {
   id   String @id @default(uuid())
+  name String
   song Song[]
 }
