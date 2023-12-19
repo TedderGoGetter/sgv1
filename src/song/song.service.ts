@@ -14,8 +14,7 @@ export class SongService {
         private jwt: JwtService,
         private config: ConfigService) {}
 
-        
-        async signup(dto: AuthDto) {
+        async postSong(dto: AuthDto) {
         const hash = await argon.hash(dto.password);
 
         //add the user to the db

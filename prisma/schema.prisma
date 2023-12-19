@@ -44,12 +44,12 @@ model Song {
 
   //Parameters for the actual post
   name       String
-  legitimacy Int
+  legitimacy Int?
   artist     Artist[]
   instrument Instrument[]
 
-  mediaLink String
-  Timestamp Int
+  mediaLink String?
+  Timestamp Int?
 }
 
 model Instrument {
