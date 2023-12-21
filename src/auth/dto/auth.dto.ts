@@ -9,4 +9,6 @@ export class AuthDto {
     @IsString()
     @IsNotEmpty()
     password: string;
+
+    author: string;
 }

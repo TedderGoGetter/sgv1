@@ -26,7 +26,7 @@ export class AuthService {
                     userName: dto.email
                 },
             });
-
+            
             return this.signToken(user.id, user.email)
 
         } catch(error) {
@@ -42,6 +42,7 @@ export class AuthService {
     async signin(dto: AuthDto) {
         //find the user by email
         const user = await this.prisma.user.findUnique({
+            
             where: {
                 email: dto.email,
             },
@@ -66,12 +67,8 @@ export class AuthService {
             sub: userId, 
             email
         }
-        const secret = this.config.get('JWT_SECRET')
 
-        const token = await this.jwt.signAsync(payload, {
-            expiresIn: '20m',
-            secret: secret
-        })  
+        const token = await this.jwt.signAsync(payload)  
 
         return {
             access_token: token,

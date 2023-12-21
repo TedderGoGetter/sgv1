@@ -1,6 +1,8 @@
-import { Body, Controller, ParseIntPipe, Post, Get, HttpCode, HttpStatus, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, ParseIntPipe, Post, Get, HttpCode, HttpStatus, UsePipes, ValidationPipe, UseGuards, Inject } from "@nestjs/common";
 import { SongService } from "./song.service";
 import { SongDto } from "./dto/song.dto";
+import { JwtGuard } from "src/auth/guard";
+
 
 @Controller('song')
 export class SongController {
@@ -8,12 +10,15 @@ export class SongController {
 
     @Get('/')
     getSong () {
-        return 'Hello'
-    } 
-
-    @Post('post')
-    postSong(@Body() songData: SongDto) {  
-        console.log({songData})
-        return songData
+        return "Hello"
     }
+
+    @UseGuards(JwtGuard)
+    @Post('/')
+    postSong(@Body() songData: SongDto) {
+        console.log({songData})
+        return this.songService.postSong(songData)
+    }
+
+    // @Inject(REQUEST) req: Request
 }
