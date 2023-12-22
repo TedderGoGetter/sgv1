@@ -24,8 +24,8 @@ import {
             secret: process.env["JWT_SECRET"]
           }
         );
-        const decoded = this.jwtService.decode(token)
-        this.jwtService.decode(token)
+        // const decoded = this.jwtService.decode(token)
+        // this.jwtService.decode(token)
 
         // 💡 We're assigning the payload to the request object here
         // so that we can access it in our route handlers
