@@ -16,5 +16,15 @@ export class AuthController {
     signin(@Body() dto: AuthDto) {
         return this.authService.signin(dto)
     }
-    
+
+    @Post('signout')
+    signout() {
+        return this.authService.signout()
+
+    }
+
+    @Post('refresh')
+    refreshToken() {
+        return this.authService.refreshToken()
+    }
 }

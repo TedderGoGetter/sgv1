@@ -59,6 +59,14 @@ export class AuthService {
         return this.signToken(user.id, user.email)
     }
 
+    signout() {
+
+    }
+
+    refreshToken() {
+        
+    }
+
     async signToken(
         userId: string, 
         email: string
