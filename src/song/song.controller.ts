@@ -2,6 +2,7 @@ import { Body, Controller, ParseIntPipe, Post, Get, HttpCode, HttpStatus, UsePip
 import { SongService } from "./song.service";
 import { SongDto } from "./dto/song.dto";
 import { JwtGuard } from "src/auth/guard";
+import { GetUser } from "src/auth/decorator";
 
 
 @Controller('song')
@@ -15,8 +16,9 @@ export class SongController {
 
     @UseGuards(JwtGuard)
     @Post('/')
-    postSong(@Body() songData: SongDto) {
+    postSong(@Body() songData: SongDto, @GetUser('sub') authorId: string) {
         console.log({songData})
+        console.log({authorId})
         return this.songService.postSong(songData)
     }
 

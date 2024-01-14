@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, isNotEmpty } from "class-validator";
 
 export class SongDto {
     
