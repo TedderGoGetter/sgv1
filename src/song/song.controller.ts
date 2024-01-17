@@ -11,6 +11,7 @@ export class SongController {
 
     @Get('/')
     getSong () {
+        console.log('get worked')
         return "Hello"
     }
 
@@ -19,8 +20,7 @@ export class SongController {
     postSong(@Body() songData: SongDto, @GetUser('sub') authorId: string) {
         console.log({songData})
         console.log({authorId})
-        return this.songService.postSong(songData)
+        return this.songService.postSong(songData, authorId)
     }
 
-    // @Inject(REQUEST) req: Request
 }

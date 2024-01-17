@@ -3,6 +3,7 @@ import { PrismaService } from "../prisma/prisma.service";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { ConfigService } from "@nestjs/config";
 import { SongDto } from "./dto";
+import { GetUser } from "src/auth/decorator";
 
 @Injectable()
 export class SongService {
@@ -11,13 +12,13 @@ export class SongService {
         private prisma: PrismaService,
         private config: ConfigService) {}
 
-        async postSong(dto: SongDto) {
+        async postSong(dto: SongDto, authorId) {
 
             try {
                 const song = await this.prisma.song.create({
                     data: {
                         name: dto.name,
-                        authorId: "c8272677-d40c-49f4-a5f9-b054481bd848",
+                        authorId: authorId,
                     },
                 });
     
