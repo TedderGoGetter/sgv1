@@ -38,3 +38,13 @@ import {
       return (type === 'Bearer' || 'bearer')? token : undefined;
     }
   }
+
+// import { AuthGuard } from "@nestjs/passport";
+
+// export class JwtGuard extends AuthGuard('jwt'){
+//     constructor() {
+//         super()
+//     }
+
+    
+// }
