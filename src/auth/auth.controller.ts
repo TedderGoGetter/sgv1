@@ -2,8 +2,6 @@ import { Body, Controller, ParseIntPipe, Post, HttpCode, HttpStatus, UseGuards, 
 import { AuthService } from "./auth.service";
 import { AuthDto } from "./dto";
 import { Tokens } from "./types";
-import { AuthGuard } from "@nestjs/passport";
-import { Request } from 'express';
 import { JwtGuard } from "./guard";
 import { RtGuard } from "./guard/rt.guard";
 import { GetUser, GetUserId } from "./decorator";

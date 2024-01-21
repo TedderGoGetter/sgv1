@@ -77,7 +77,7 @@ export class AuthService {
                 id: userId
             }
         })
-        if (!user) throw new ForbiddenException("Access denied")
+        if (!user || !user.hashedRt) throw new ForbiddenException("Access denied")
 
         const rtMatches = await argon.verify(user.hashedRt, rt)
         if (!rtMatches) throw new ForbiddenException("Access denied")

@@ -9,9 +9,9 @@ import { JwtStrategy, RtStrategy } from "./strategy";
     imports: [PrismaModule, JwtModule.register({
         secret: process.env["JWT_SECRET"],
         global: true,
-        signOptions: {
-            expiresIn: '24h',
-        }
+        // signOptions: {
+        //     expiresIn: '24h',
+        // }
     })],
     controllers: [AuthController],
     providers: [AuthService, JwtStrategy, RtStrategy]
