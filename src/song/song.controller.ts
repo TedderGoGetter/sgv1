@@ -9,10 +9,10 @@ import { GetUser } from "src/auth/decorator";
 export class SongController {
     constructor (private songService: SongService) {}
 
+    @UseGuards(JwtGuard)
     @Get('/')
     getSong () {
-        console.log('get worked')
-        return "Hello"
+        return this.songService.getSongs()
     }
 
     @UseGuards(JwtGuard)

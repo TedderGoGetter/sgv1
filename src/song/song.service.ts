@@ -11,6 +11,10 @@ export class SongService {
         private prisma: PrismaService,
         private config: ConfigService) {}
 
+        async getSongs() {
+            return this.prisma.song.findMany({})
+        }
+
         async postSong(dto: SongDto, authorId) {
 
             //trying to see if artists are known, and creating one if need be.
